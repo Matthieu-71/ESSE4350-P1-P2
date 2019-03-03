@@ -65,7 +65,7 @@ package SatTrack
     
   end Satellite;
 
-  model TestCase
+  model Testing
   
     //TEST CASE
     //COSMOS 2485 (747)
@@ -102,5 +102,5 @@ package SatTrack
    raan = PlotTest.raan;
    argper = PlotTest.argper;
   
-  end TestCase;
+  end Testing;
 end SatTrack;
