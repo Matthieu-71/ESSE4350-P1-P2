@@ -31,17 +31,19 @@ package SatTrack
     Real v_sat_pf[3] "Satellite vel in pf coords (km/s)";
     
   initial equation
-    M = (M0 + N0*(360/86400)*tstart + 360*Ndot2*(tstart/86400)^2 + 360*(Nddot6)*(tstart/86400)^3)+1.09;
-    N = N0 + 2 * Ndot2 * (time / 86400. ^ 2) + 3 * Nddot6 * (time ^ 2 / 86400. ^ 3);
+    // Keplerian Orbital Elements
     a = a0;
     incl = incl;
-    raan = raan0 + (N0 * 360. / 86400.) * (3. * k2 * cos(incl  * d2r) / (a^2 * (1. - eccn^2)^2)) * tstart;
-    argper = argper0 + (N0 * 360. / 86400.) * (3. * k2 * (5. * cos(incl  * d2r)^2 - 1.) / (a^2 * (1. - eccn^2)^2)) * tstart;
+    M = (M0 + N0*(360/86400)*tstart + 360*Ndot2*(tstart/86400)^2 + 360*(Nddot6)*(tstart/86400)^3)+1.09;
+    N = N0 + 2 * Ndot2 * (time / 86400. ^ 2) + 3 * Nddot6 * (time ^ 2 / 86400. ^ 3);
+    argper = argper0 + (3. * k2 * (5. * cos(incl  * d2r)^2 - 1.) * (N0 * 360. / 86400.)/ tstart * (a^2 * (1. - eccn^2)^2));
+    raan = raan0 +  (3. * k2 * cos(incl  * d2r) * (N0 * 360. / 86400.) / tstart * (a^2 * (1. - eccn^2)^2));
+    
     
     
   equation
     M * d2r = E * d2r - eccn * sin(E * d2r);
-    der(M) = N0 * (360. / 86400.) + 2 * 360. * Ndot2 * (time / 86400. ^ 2) + 3 * 360. * Nddot6 * (time ^ 2 / 86400. ^ 3);
+    der(M) = N0 * 360. * (360. / 86400.) + 2 * Ndot2 * (time / 86400. ^ 2) + 3 * 360. * Nddot6 * (time ^ 2 / 86400. ^ 3);
     tan(theta * d2r / 2.) = sqrt((1. + eccn) / (1. - eccn)) * tan(E * d2r / 2.);
     r = a * (1. - eccn ^ 2) / (1. + eccn * cos(theta * d2r));
     N = 86400 / (2. * pi) * sqrt(Gconst / a ^ 3);
@@ -65,13 +67,14 @@ package SatTrack
 
   model TestCase
   
+    //TEST CASE
     //COSMOS 2485 (747)
     //TLE parameters
     //1 39155U 13019A   19061.75354861 -.00000038  00000-0  00000+0 0  9994
     //2 39155  64.6665 163.3110 0018561 233.7464  42.2514  2.1310183745523
   
   SatTrack.Satellite PlotTest(M0=42.2514,N0=2.1310183745523,eccn=0.0018561,
-                                Ndot2=-.00000038,Nddot6=0.,raan0=163.3110,
+                                Ndot2=-0.00000038,Nddot6=0.,raan0=163.3110,
                                 argper0=233.7464,incl=64.6665,tstart = 0.);
   
    Real M;
