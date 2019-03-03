@@ -41,7 +41,7 @@ def ReadNoradTLE(filename)
   line1 = str(ff.readline())
   line2 = str(ff.readline())
 
-  name = str(line1[2:6]) #NAME OF SAT
+  name = str(line0) #NAME OF SAT
   refepoch = float(line1[18:31]) #REFERENCE EPOCH, LAST 2 DIGITS OF YEAR FOLLOWED BY NUMBER OF DAYS PASSED IN THE YEAR
   incl = float(line2[8:15]) # INCLINATION (DEGREES)
   raan = float(line2[17:24]) # RAAN (DEGREES)
@@ -52,7 +52,7 @@ def ReadNoradTLE(filename)
   ndot = float(line1[33:42]) # FIRST TIME DERIVATIVE OF THE MEAN MOTION
   nddot6 = float(line1[44:51]) # SECOND TIME DERIVATIVE OF THE MEAN MOTION
   bstar = float(line1[53:60]) # BSTAR DRAG TERM 
-  orbitnum = int(line1[64:67]) # ELEMENT NUMBER
+  orbitnum = int(line1[2:6]) # SATELLITE NUMBER = ORBIT NUMBER ??
   
   Station = (name, refepoch, incl, raan, eccn, argper, meanan, meanmo, ndot, nddot6, bstar, orbitnum)
 return Station  
