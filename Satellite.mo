@@ -1,4 +1,4 @@
-package SatTrack
+package SatelliteTracking
   model Satellite
 
     constant Real pi = Modelica.Constants.pi;
@@ -103,4 +103,4 @@ package SatTrack
    argper = PlotTest.argper;
   
   end Testing;
-end SatTrack;
+end SatelliteTracking;
