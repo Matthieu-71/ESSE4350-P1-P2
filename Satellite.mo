@@ -73,7 +73,7 @@ package SatelliteTracking
     //1 39155U 13019A   19061.75354861 -.00000038  00000-0  00000+0 0  9994
     //2 39155  64.6665 163.3110 0018561 233.7464  42.2514  2.1310183745523
   
-  SatTrack.Satellite PlotTest(M0=42.2514,N0=2.1310183745523,eccn=0.0018561,
+  SatelliteTracking.Satellite PlotTest(M0=42.2514,N0=2.1310183745523,eccn=0.0018561,
                                 Ndot2=-0.00000038,Nddot6=0.,raan0=163.3110,
                                 argper0=233.7464,incl=64.6665,tstart = 0.000001);
   
