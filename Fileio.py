@@ -13,7 +13,7 @@ def errmsg()
   frequency = 2500  # Set Frequency To 2500 Hertz
   duration = 1000  # Set Duration To 1000 ms == 1 second
   winsound.Beep(frequency, duration)
-return none 
+  return none 
 
 def ReadStationFile(filename)
   f = open(filename, 'r')
@@ -29,11 +29,11 @@ def ReadStationFile(filename)
   elmin = float(f.readline().split(" = ")[1])  #read next line, register float read after " = " MIN ELEVATION (DEGREES)
   elmax = float(f.readline().split(" = ")[1])  #read next line, register float read after " = " MAX ELEVATION (DEGREES)
   az_speed_max = float(f.readline().split(" = ")[1])  #read next line, register float read after " = " MAX AZIMUTH SPEED (M/S)
-  el_speed_min = float(f.readline().split(" = ")[1])  #read next line, register float read after " = " MAX ELEVATION SPEED (M/S)
+  el_speed_max = float(f.readline().split(" = ")[1])  #read next line, register float read after " = " MAX ELEVATION SPEED (M/S)
 
   stntup = namedtuple('stntup', ['name', 'stnlat', 'stnlong', 'stnalt', 'utc_offset', 'az_el_nlim', 'azmin', 'azmax', 'elmin', 'elmax', 'az_speed_max', 'el_speed_max'])  # SETTING UP STN NAMED TUPLE
-  Station = stntup(name, stnlat, stnlong, stnalt, utc_off, az_el_nlim, azmin, azmax, elmin, elmax, az_speed_max, el_speed_max)
-return Station
+  Station = stntup(name, stnlat, stnlong, stnalt, utc_offset, az_el_nlim, azmin, azmax, elmin, elmax, az_speed_max, el_speed_max)
+  return Station
   
 
 def ReadNoradTLE(filename)
@@ -57,7 +57,7 @@ def ReadNoradTLE(filename)
   
   nrdtup = namedtuple('nrdtup', ['name', 'refepoch', 'incl', 'raan', 'eccn', 'argper', 'meanan', 'meanmo', 'ndot', 'nddot6', 'bstar', 'orbitnum']) # SETTING UP NORAD TLE NAMED TUPLE
   Station = nrdtup(name, refepoch, incl, raan, eccn, argper, meanan, meanmo, ndot, nddot6, bstar, orbitnum)
-return Station  
+  return Station  
 
  
   
