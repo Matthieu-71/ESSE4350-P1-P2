@@ -83,10 +83,15 @@ def ReadNoradTLE(filename):
   return Satellite
 
  
-  def STKout(filename, EphemSyst, time, position, velocity)
+  def STKout(filename, EphemSyst, time, position, velocity):
+    #filename = name of .e file to be created
+    #EphemSyst = name of .txt file containing header/settings of .e file to be created
+    #time = n-sized array
+    #position = n-by-3-sized matrix
+    #velocity = n-by-3-sized matrix
   
     fff = open(EphemSyst,'r')
-    
+    #-------extracting data of header, might be needed----------
     stkver = fff.readline().split("v.")[1]
     nEpehmPts = int(fff.readline().split(" ")[1])
     Epoch = str(fff.readline().split("  ")[1])
@@ -94,16 +99,18 @@ def ReadNoradTLE(filename):
     IntOrder = int(fff.readline().split(" ")[1])
     CentBody = str(fff.readline().split("  ")[1])
     CoordSyst = str(fff.readline().split("  ")[1])
+    #------------------------------------------------------------
     
-    
+    #-----------------writing output file------------------------
     ffff= open(filename,'w+')
     
     ffff.write(fff, "\n")
     
-    for i in range(nEphemPts):
-     ffff.write(time[i], " ", position[i], " ", velocity[i], "\n")
-     i+=1
- 
+    for k in range(nEphemPts):
+        ffff.write(time[k], " ", position[k, 1], " ", position[k, 2], " ", position[k, 3], " ", velocity[k, 1], " ", velocity[k, 2], " ", velocity[k, 3], "\n")
+        k+=1
+    #-------------------------------------------------------------
+    
     return None
                 
                 
