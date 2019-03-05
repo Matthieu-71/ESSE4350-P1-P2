@@ -103,4 +103,25 @@ package SatelliteTracking
    argper = PlotTest.argper;
   
   end Testing;
+  
+  
+  function range_topo2look_angles
+      input Real p_sat_topo[3] "Position of satellite in topo coords (km)";
+
+      Real az;
+      Real el;
+  
+      equation
+          az = atan(p_sat_topo[1]/p_sat_topo[2]);
+          el = atan(p_sat_topo[3]/sqrt((p_sat_topo[1]^2)+(p_sat_topo[2]^2));
+  
+      output Real az "Azimuth look angle (deg)";
+      output Real el "Elevation look angle (deg)";
+  
+      protected
+      Real d2r = Modelica.Constants.D2R;
+  end range_topo2look_angles;
+  
 end SatelliteTracking;
+
+
