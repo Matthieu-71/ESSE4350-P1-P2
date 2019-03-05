@@ -1,6 +1,7 @@
 import numpy as np
 import datetime as dt
 import winsound
+import msvcrt
 from collections import namedtuple
 
 def banner():
@@ -8,7 +9,10 @@ def banner():
  
   return None 
 
-#def anykey()
+def anykey():
+    msvcrt.getch()    #windows function, prompts for user input in the form of any key
+  
+    return None
 
 def errmsg():
   frequency = 2500  # Set Frequency To 2500 Hertz
