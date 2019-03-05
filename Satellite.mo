@@ -120,7 +120,7 @@ package SatelliteTracking
           az = atan(p_sat_topo[1]/p_sat_topo[2]);
           el = atan(p_sat_topo[3]/sqrt((p_sat_topo[1]^2)+(p_sat_topo[2]^2));
           dazdt = (skew(v_sat_topo[1:2])*p_sat_topo[1:2])/(p_sat_topo[1:2]*p_sat_topo[1:2]);
-          deldt = ((sqrt(p_sat_topo[1:2]*p_sat_topo[1:2])*v_sat_topo[3])-(p_sat_topo[3]*(p_sat_topo[1:2]*v_sat_topo[1:2])/sqrt(p_sat_topo[1:2]*p_sat_topo[1:2]))/(p_sat_topo*p_sat_topo);
+          deldt = ((sqrt(p_sat_topo[1:2]*p_sat_topo[1:2])*v_sat_topo[3])-(p_sat_topo[3]*(p_sat_topo[1:2]*v_sat_topo[1:2])/sqrt(p_sat_topo[1:2]*p_sat_topo[1:2])))/(p_sat_topo*p_sat_topo);
   
   end range_topo2look_angles;
   
