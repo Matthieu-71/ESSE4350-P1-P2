@@ -83,4 +83,34 @@ def ReadNoradTLE(filename):
   return Satellite
 
  
+  def STKout(filename, EphemSyst, time, position, velocity)
+  
+    fff = open(EphemSyst,'r')
+    
+    stkver = fff.readline().split("v.")[1]
+    nEpehmPts = int(fff.readline().split(" ")[1])
+    Epoch = str(fff.readline().split("  ")[1])
+    IntMethod = str(fff.readline().split("  ")[1])
+    IntOrder = int(fff.readline().split(" ")[1])
+    CentBody = str(fff.readline().split("  ")[1])
+    CoordSyst = str(fff.readline().split("  ")[1])
+    
+    
+    ffff= open(filename,'w+')
+    
+    ffff.write(fff, "\n")
+    
+    for i in range(nEphemPts):
+     ffff.write(time[i], " ", position[i], " ", velocity[i], "\n")
+     i+=1
+ 
+    return None
+                
+                
+     
+                
+    
+    
+    
+    
   
