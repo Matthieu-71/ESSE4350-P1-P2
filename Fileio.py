@@ -1,7 +1,8 @@
-import numpy as np
-import datetime as dt
+import numpy
+import datetime
+#import keyboard
 import winsound
-import msvcrt
+#import msvcrt
 from collections import namedtuple
 
 def banner():
@@ -10,14 +11,16 @@ def banner():
   return None 
 
 def anykey():
-    msvcrt.getch()    #windows function, prompts for user input in the form of any key
-  
+    #msvcrt.getch()    #msvcrt module function, prompts for user input in the form of any key
+    #keyboard.sleep()    #special module function, prompts for user input in the form of any key
+    input("Press Enter to continue...")
     return None
 
 def errmsg():
   frequency = 2500  # Set Frequency To 2500 Hertz
   duration = 1000  # Set Duration To 1000 ms == 1 second
   winsound.Beep(frequency, duration)
+  print("ERROR DETECTED")
   
   return None
 
@@ -83,7 +86,7 @@ def ReadNoradTLE(filename):
   return Satellite
 
  
-  def STKout(filename, EphemSyst, time, position, velocity):
+def STKout(filename, EphemSyst, time, position, velocity):
     #filename = name of .e file to be created
     #EphemSyst = name of .txt file containing header/settings of .e file to be created
     #time = n-sized array
@@ -93,31 +96,25 @@ def ReadNoradTLE(filename):
     fff = open(EphemSyst,'r')
     #-------extracting data of header, might be needed----------
     stkver = fff.readline().split("v.")[1]
-    nEpehmPts = int(fff.readline().split(" ")[1])
-    Epoch = str(fff.readline().split("  ")[1])
-    IntMethod = str(fff.readline().split("  ")[1])
-    IntOrder = int(fff.readline().split(" ")[1])
-    CentBody = str(fff.readline().split("  ")[1])
-    CoordSyst = str(fff.readline().split("  ")[1])
+    nEphemPts = int(fff.readline().split(" ",1)[1])
+    Epoch = str(fff.readline().split("  ",1)[1])
+    IntMethod = str(fff.readline().split("  ",1)[1])
+    IntOrder = int(fff.readline().split(" ",1)[1])
+    CentBody = str(fff.readline().split("  ",1)[1])
+    CoordSyst = str(fff.readline().split("  ",1)[1])
     #------------------------------------------------------------
+    
+    headr = open(EphemSyst,'r')
+    headc = headr.read() #extracting the whole content of header file as str
     
     #-----------------writing output file------------------------
     ffff= open(filename,'w+')
     
-    ffff.write(fff, "\n")
+    ffff.write(str(headc) + '\n')
     
     for k in range(nEphemPts):
-        ffff.write(time[k], " ", position[k, 1], " ", position[k, 2], " ", position[k, 3], " ", velocity[k, 1], " ", velocity[k, 2], " ", velocity[k, 3], "\n")
+        ffff.write(str(time[k]) + " " + str(position[k][0]) + " " + str(position[k][1]) + " " + str(position[k][2]) + " " + str(velocity[k][0]) + " " + str(velocity[k][1]) + " " + str(velocity[k][2]) + "\n")
         k+=1
     #-------------------------------------------------------------
     
     return None
-                
-                
-     
-                
-    
-    
-    
-    
-  
