@@ -6,7 +6,7 @@ import winsound
 from collections import namedtuple
 
 def banner():
-  print("Team members: Matthieu Durand, Naufal Rafi Antares, Yuri LASTNAME\nProgram name: PROGRAM NAME\nRevision date: 2/28/2019\nVersion: 1.00\n\nYou can check out anytime you want, but you can never leave!")
+  print("Team members: Matthieu Durand, Naufal Rafi Antares, Yuri Davydov\nProgram name: SatTrack\nRevision date: 2/28/2019\nVersion: 1.00\n\nYou can check out anytime you want, but you can never leave!")
  
   return None 
 
@@ -60,9 +60,10 @@ def ReadNoradTLE(filename):
       nlines += 1
       
   
-  nsat = nlines/3
+  nsat = int(nlines/3)
   Satellite = [[]*12]*nsat
   
+  ff = open(filename, 'r')
   for j in range(0, nsat):
       line0 = str(ff.readline())
       line1 = str(ff.readline())
