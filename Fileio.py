@@ -27,11 +27,11 @@ def errmsg():
 def ReadStationFile(filename):
   f = open(filename, 'r')
   name = str(f.readline())    #read first line, register string  NAME OF STN
-  stnlat = float(f.readline().replace("\n", ""))  #read next line, register float  LATITUDE OF STN (DEGREES)
-  stnlong = float(f.readline().replace("\n", "")) #read next line, register float  LONGITUDE OF STN (DEGREES)
-  stnalt = float(f.readline().replace("\n", ""))  #read next line, register float  ALTITUDE OF STN (METRES)
-  utc_offset = float(f.readline().replace("\n", ""))  #read next line, register float  UTC OFFSET
-  az_el_nlim = int(f.readline().replace("\n", ""))  #read next line, register integer  NUMBER OF AZ-EL LIMITS
+  stnlat = float(f.readline())  #read next line, register float  LATITUDE OF STN (DEGREES)
+  stnlong = float(f.readline()) #read next line, register float  LONGITUDE OF STN (DEGREES)
+  stnalt = float(f.readline())  #read next line, register float  ALTITUDE OF STN (METRES)
+  utc_offset = float(f.readline())  #read next line, register float  UTC OFFSET
+  az_el_nlim = int(f.readline())  #read next line, register integer  NUMBER OF AZ-EL LIMITS
   azellim = namedtuple('azellim',['az','elmin','elmax']) #setting up namedtuple for the azimuthal elevation limits
   az_el_lim = [[]*3]*az_el_nlim
 
@@ -43,8 +43,8 @@ def ReadStationFile(filename):
         az_el_lim[i] = azellim(az, elmin, elmax)
         i+=1
   
-  az_speed_max = float(f.readline().replace("\n", ""))  #read next line, register float  MAX AZIMUTH SPEED (M/S)
-  el_speed_max = float(f.readline().replace("\n", ""))  #read next line, register float  MAX ELEVATION SPEED (M/S)
+  az_speed_max = float(f.readline())  #read next line, register float  MAX AZIMUTH SPEED (M/S)
+  el_speed_max = float(f.readline())  #read next line, register float  MAX ELEVATION SPEED (M/S)
 
   stntup = namedtuple('stntup', ['name', 'stnlat', 'stnlong', 'stnalt', 'utc_offset', 'az_el_nlim', 'az_el_lim', 'az_speed_max', 'el_speed_max'])  # SETTING UP STN NAMED TUPLE
   Station = stntup(name, stnlat, stnlong, stnalt, utc_offset, az_el_nlim, az_el_lim, az_speed_max, el_speed_max)
